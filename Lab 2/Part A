@@ -1,0 +1,175 @@
+fun main() {
+    	println("-----------------TASK1-----------------")
+    task1()
+    
+        println("-----------------TASK2-----------------")
+
+    task2()
+    
+        println("-----------------TASK3-----------------")
+
+    task3()
+    
+        println("-----------------TASK4-----------------")
+
+    task4()
+    
+        println("-----------------TASK5-----------------")
+
+    task5()
+}
+    
+//TASK1
+
+fun task1() {
+    
+val university = "Imam Abdulrahman Bin Faisal University"
+val courseCode = "CSC 402"
+val creditHours = 3
+var studentsEnrolled = 28
+val isElective = false
+    
+println("Course $courseCode has $studentsEnrolled students enrolles ($creditHours credit hours).")
+
+studentsEnrolled+=2
+    
+println("Course $courseCode has $studentsEnrolled students enrolles ($creditHours credit hours).")
+
+println("University name length: ${university.length}")
+
+//courseCode = "CSC 403"
+
+    }
+
+
+//TASK2
+
+fun greetStudent(name: String, course: String = "CSC 402"): String {
+    
+    return "Welcome to $course, $name!"
+    
+}
+
+fun finalMark(quizzes: Double, project: Double, finalExam: Double): Double =
+    quizzes * 0.10 + project * 0.70 + finalExam * 0.20
+
+
+fun printBanner(title: String, width: Int = 40) {
+    val dashes = "-".repeat(width)
+    println(dashes)
+    println(title)
+    println(dashes)
+}
+
+fun task2() {
+
+printBanner("CSC 402 Lab 2")
+
+println(greetStudent("Sara"))
+println(greetStudent("Sara", "CSC 401"))
+
+    val mark1 = finalMark(80.0, 90.0, 85.0)
+    val mark2 = finalMark(finalExam = 85.0, quizzes = 80.0, project = 90.0)
+
+    println("Final mark (positional): $mark1")
+    println("Final mark (named): $mark2")
+	
+
+}
+
+
+//TASK3
+
+fun letterGrade(mark: Int): String {
+    return when (mark) {
+        in 95..100 -> "A+"
+        in 90..94 -> "A"
+        in 85..89 -> "B+"
+        in 80..84 -> "B"
+        in 75..79 -> "C+"
+        in 70..74 -> "C"
+        in 65..69 -> "D+"
+        in 60..64 -> "D"
+        in 0..59 -> "F"
+        else -> "Invalid"
+    }
+}
+
+fun status(mark: Int): String {
+    return if (mark in 60..100) "Pass" else "Fail"
+}
+
+fun task3() {
+    val marks = listOf(97, 88, 74, 61, 45, 130)
+
+    for (mark in marks) {
+        val grade = letterGrade(mark)
+        val result = status(mark)
+        println("Mark %3d -> %-7s (%s)".format(mark, grade, result))
+    }
+}
+
+
+//TASK4
+
+fun describeTeam(teamName: String?): String {
+    return teamName?.let { "Team: $it (${it.length} characters)" } ?: "Team not registered yet"
+}
+
+fun task4() {
+val nickname: String? = null
+val fullName: String = "Abdullah Al-Qahtani"
+println(fullName.length)
+println(nickname?.length) 
+
+    println(nickname ?: "no nickname set")
+
+    println(describeTeam("Team Falcon"))
+    println(describeTeam(null))
+}
+
+
+//TASK5
+
+data class Course(val code: String, val title: String, val credits: Int, val days: String)
+
+fun findCourse(list: List<Course>, code: String): String {
+    return list.firstOrNull { it.code == code }?.title ?: "Course not found"
+}
+
+fun task5() {
+    val courses = listOf(
+        Course("CSC 402", "Mobile Application Programming", 3, "Mon / Wed"),
+        Course("CSC 311", "Database Systems", 4, "Sun / Tue"),
+        Course("CSC 340", "Operating Systems", 3, "Mon / Wed"),
+        Course("MATH 202", "Discrete Mathematics", 3, "Sun / Thu"),
+        Course("ENG 214", "Technical Writing", 2, "Tue")
+    )
+    
+    courses.forEach { println(it) }
+
+    println("\nCourses with 3+ credits:")
+    val highCreditCourses = courses.filter { it.credits >= 3 }
+    highCreditCourses.forEach { println(it) }
+
+    val courseCodes = courses.map { it.code }
+    println("\nCourse codes: $courseCodes")
+
+    val totalCredits = courses.sumOf { it.credits }
+    println("\nTotal credit hours: $totalCredits")
+
+    println("\n${findCourse(courses, "CSC 402")}")
+    println(findCourse(courses, "CSC 999"))
+    
+    val original = courses.first { it.code == "CSC 402" }
+    val updated = original.copy(credits = 4)
+
+    println("\nOriginal: $original")
+    println("Updated copy: $updated")
+    
+
+}
+    
+    
+    
+    
